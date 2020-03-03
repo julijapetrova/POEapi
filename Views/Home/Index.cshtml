@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="//code.jquery.com/jquery.min.js" type="text/javascript"></script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<script>
+    $.get("/api/items", function (data) {
+
+        jQuery.each(data, function (i, item) {
+            $("#result").append("<tr><td>" + item.price + "</td><td>" + item.name + "</td><td>" + item.description + "</td></tr>")
+        });
+
+        alert("Load was performed.");
+    });
+</script>
+<style>
+    table {
+        border-collapse: collapse;
+        border: 1px solid black;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+    }
+</style>
+<table id="result"></table>
+
