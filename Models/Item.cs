@@ -53,12 +53,12 @@ namespace POEapi.Models
         public ItemDTO MapToDTO()
         {
             ItemDTO itemDTO = new ItemDTO();
-            itemDTO.price = this.note;
+            itemDTO.price.Details = this.note;
             itemDTO.name = this.name;
             itemDTO.description = this.descrText;
 
             return itemDTO;
         }
     }
-       
+
 }

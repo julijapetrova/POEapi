@@ -93,7 +93,7 @@ namespace POEapi.Controllers
                                 foreach (var item in stash.items)
                                 {
                                     var i = item.MapToDTO();
-                                    i.price = stash.stash.ToString();
+                                    i.price = new Price() { Details = stash.stash.ToString() };
                                     items.Add(i);
 
                                 }
