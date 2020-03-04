@@ -11,7 +11,7 @@
     $.get("/api/items", function (data) {
 
         jQuery.each(data, function (i, item) {
-            $("#result").append("<tr><td>" + item.price + "</td><td>" + item.name + "</td><td>" + item.description + "</td></tr>")
+            $("#result").append("<tr><td>" + item.price.value +" "+ item.price.currency+ "</td><td>" + item.name + "</td><td>" + item.description + "</td></tr>")
         });
 
         alert("Load was performed.");

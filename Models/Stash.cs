@@ -28,8 +28,6 @@ namespace POEapi.Models
         //  "stashType": "PremiumStash",
         //  "league": "Standard",
         //  "items": [
-
-
         //  ]
         //},
     }

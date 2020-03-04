@@ -84,7 +84,8 @@ namespace POEapi.Controllers
                     string responseBody = await client.GetStringAsync("http://api.pathofexile.com/public-stash-tabs");
 
                     stashRootObject = JsonConvert.DeserializeObject<StashRootObject>(responseBody);
-                    foreach (var stash in stashRootObject.stashes)
+                    var filteredStashes = stashRootObject.stashes.Where(x => x.league != "standard");
+                    foreach (var stash in filteredStashes)
                     {
                         if (stash.stash != null)
                             if (stash.stash.ToString().Contains("~"))

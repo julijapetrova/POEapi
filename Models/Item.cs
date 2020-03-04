@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POEapi.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace POEapi.Models
         public ItemDTO MapToDTO()
         {
             ItemDTO itemDTO = new ItemDTO();
-            itemDTO.price.Details = this.note;
+            itemDTO.price = HelperMethods.getInstance().InterpretItemPrice(this.note);
             itemDTO.name = this.name;
             itemDTO.description = this.descrText;
 
