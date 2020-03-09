@@ -6,20 +6,6 @@ using System.Threading.Tasks;
 
 namespace POEapi.Models
 {
-    public class Property
-    {
-        public string name { get; set; }
-        public List<List<object>> values { get; set; }
-        public int displayMode { get; set; }
-        public int type { get; set; }
-    }
-
-    public class Requirement
-    {
-        public string name { get; set; }
-        public List<List<object>> values { get; set; }
-        public int displayMode { get; set; }
-    }
 
     public class Extended
     {
@@ -50,16 +36,5 @@ namespace POEapi.Models
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }
-
-        public ItemDTO MapToDTO()
-        {
-            ItemDTO itemDTO = new ItemDTO();
-            itemDTO.price = HelperMethods.getInstance().InterpretItemPrice(this.note);
-            itemDTO.name = this.name;
-            itemDTO.description = this.descrText;
-
-            return itemDTO;
-        }
     }
-
 }

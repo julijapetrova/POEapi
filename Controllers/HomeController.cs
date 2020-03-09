@@ -11,22 +11,27 @@ namespace POEapi.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILogger<HomeController> _logger;
+        private readonly StashesContext _context;
+
+        public HomeController(ILogger<HomeController> logger, StashesContext context)
         {
-            _logger = logger;
+            _logger = logger; _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            StashesController stashesController = new StashesController(_context);
+            List<ItemDTO> items = (List<ItemDTO>)stashesController.GetAllItems().Result;
+            return View(items);
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

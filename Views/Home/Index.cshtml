@@ -1,33 +1,54 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model List<ItemDTO>
 <script src="//code.jquery.com/jquery.min.js" type="text/javascript"></script>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-<script>
-    $.get("/api/items", function (data) {
+@*<script>
+        $.get("/api/items", function (data) {
 
-        jQuery.each(data, function (i, item) {
-            $("#result").append("<tr><td>" + item.price.value +" "+ item.price.currency+ "</td><td>" + item.name + "</td><td>" + item.description + "</td></tr>")
+            jQuery.each(data, function (i, item) {
+                $("#result").append(
+                    "<tr><td>" + "<img src='" + item.icon + "'/>" +
+                    "</td><td>" + item.price.value +
+                    "</td><td>" + item.price.currency +
+                    "</td><td>" + item.name +
+                    "</td><td>" + item.description +
+                    "</td><td>" + item.properties +
+                    "</td><td>" + item.requirements +
+                    "</td></tr>"
+                )
+            });
+
+            alert("Load was performed.");
         });
+    </script>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            table-layout: fixed;
+            width: 100%;
+        }
 
-        alert("Load was performed.");
-    });
-</script>
-<style>
-    table {
-        border-collapse: collapse;
-        border: 1px solid black;
-        table-layout: fixed;
-        width: 100%;
-    }
-
-    th, td {
-        border: 1px solid black;
-    }
-</style>
-<table id="result"></table>
-
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <table id="result"></table>*@
+<table>
+       
+@foreach (var item in Model)
+{
+    <tr>
+        <td><img src="@item.icon" alt="-" /></td>
+        <td>@item.price.Value</td>
+        <td>@item.price.Currency</td>
+        <td>@item.description</td>
+    </tr>
+}
+</table>

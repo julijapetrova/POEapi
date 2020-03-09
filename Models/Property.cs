@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace POEapi.Models
 {
-    public class ItemDTO
+    public class Property
     {
-
-        public Price price { get; set; }
         public string name { get; set; }
-        public string description { get; set; }
-        public string icon { get; set; }
+        public List<List<object>> values { get; set; }
+        public int displayMode { get; set; }
+        public int type { get; set; }
     }
-
 }

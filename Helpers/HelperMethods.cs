@@ -34,7 +34,6 @@ namespace POEapi.Helpers
         // ~price 3 chaos
         public Price InterpretItemPrice(string itemPrice)
         {
-
             Price price = new Price();
             price.Value = getPriceValue(itemPrice);
             price.Currency = getPriceCurrency(itemPrice);
@@ -54,7 +53,7 @@ namespace POEapi.Helpers
         string getPriceCurrency(string itemPrice)
         {
             var result = "";
-            Regex regex = new Regex(@"\d.*?");
+            Regex regex = new Regex(@"(?<=\b\s)([^\d]\w+)");
             if (itemPrice != null)
             {
                 result = regex.Split(itemPrice)[1];
@@ -69,6 +68,15 @@ namespace POEapi.Helpers
             alt,// Orb of Alteration
             exa,// Exalted Orb
             fuse // Orb of Fusing
+        }
+        public ItemDTO MapToDTO(Item from)
+        {
+            ItemDTO to = new ItemDTO();
+            to.price = HelperMethods.getInstance().InterpretItemPrice(from.note);
+            to.name = from.name;
+            to.description = from.descrText;
+            to.icon = from.icon;
+            return to;
         }
     }
 }

@@ -84,19 +84,18 @@ namespace POEapi.Controllers
                     string responseBody = await client.GetStringAsync("http://api.pathofexile.com/public-stash-tabs");
 
                     stashRootObject = JsonConvert.DeserializeObject<StashRootObject>(responseBody);
-                    var filteredStashes = stashRootObject.stashes.Where(x => x.league != "standard");
-                    foreach (var stash in filteredStashes)
+                    foreach (var stash in stashRootObject.stashes)
                     {
                         if (stash.stash != null)
                             if (stash.stash.ToString().Contains("~"))
                             {
+                                // from stash 
                                 var items = new List<ItemDTO>();
                                 foreach (var item in stash.items)
                                 {
-                                    var i = item.MapToDTO();
-                                    i.price = new Price() { Details = stash.stash.ToString() };
-                                    items.Add(i);
-
+                                    var i = item;
+                                    i.note = stash.stash.ToString();
+                                    items.Add(Helpers.HelperMethods.getInstance().MapToDTO(i));
                                 }
 
                                 pricedItems.AddRange(items); ;
@@ -104,13 +103,14 @@ namespace POEapi.Controllers
                             }
                             else
                             {
+                                // from item 
                                 foreach (var item in stash.items)
                                 {
                                     if (item.note != null)
                                     {
                                         if (item.note.Contains("~"))
                                         {
-                                            var i = item.MapToDTO();
+                                            var i = Helpers.HelperMethods.getInstance().MapToDTO(item);
                                             pricedItems.Add(i);
                                         }
                                     }
@@ -125,7 +125,7 @@ namespace POEapi.Controllers
                 }
             }
 
-            return pricedItems;
+            return pricedItems.ToList();
         }
     }
 }
